@@ -1,0 +1,27 @@
+<html>
+<head>
+  <title>MVP</title>
+</head>
+
+<div id="app"></div>
+
+<script src="client/vendor/mithril.js"></script>
+<script src="client/ext/functions.js"></script>
+<script src="client/components/app.js.js"></script>
+
+<script src="src/models/link.js"></script>
+<script src="src/components/links.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+
+<script>
+
+  //Expanded version (m.module wants a controller and a view)
+  m.module(document.getElementById('app'), {
+    controller: /*something */,
+    view: /* something else  */
+  })
+
+</script>
+
+</html>
