@@ -7,7 +7,7 @@
 
 <div class = "header" >
   <a href = "/" > Home </a> 
-  <a href = "/login"> Login </a>
+  <a href = "#/login"> Login </a>
 </div>
 
 <div id="app"></div>
@@ -15,13 +15,16 @@
 <script src="vendor/mithril.js"></script>
 <script src="ext/functions.js"></script>
 <script src="components/home.js"></script>
+<script src="components/signup.js"></script>
+<script src="components/login.js"></script>
 
 <script>
   m.route.mode = "hash";
   m.route(document.getElementById('app'), "/", {
     "/": home,
-    // "/login": login,
-    // "/dashboard": dashboard,
+    "/login": login,
+    "/signup": signup,
+
 });
 
 </script>
