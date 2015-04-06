@@ -26,13 +26,13 @@ Once the project moves into development, the press release can be used as a touc
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > When going through stressfull situations, monitoring your emotional state, and keeping a positive outlook can be difficult.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > This app helps you track your emotional state when going through stressfull stituations. Coupled with the some perspective techniques. You can change your baseline emotional state for the better. 
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  >  "Its de best!".
 
 ## How to Get Started ##
   > Describe how easy it is to get started.
