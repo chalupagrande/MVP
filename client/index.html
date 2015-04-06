@@ -1,26 +1,28 @@
 <html>
 <head>
   <title>MVP</title>
+
+  <link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
+
+<div class = "header" >
+  <a href = "/" > Home </a> 
+  <a href = "/login"> Login </a>
+</div>
 
 <div id="app"></div>
 
-<script src="client/vendor/mithril.js"></script>
-<script src="client/ext/functions.js"></script>
-<script src="client/components/app.js.js"></script>
-
-<script src="src/models/link.js"></script>
-<script src="src/components/links.js"></script>
-<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-
+<script src="vendor/mithril.js"></script>
+<script src="ext/functions.js"></script>
+<script src="components/home.js"></script>
 
 <script>
-
-  //Expanded version (m.module wants a controller and a view)
-  m.module(document.getElementById('app'), {
-    controller: /*something */,
-    view: /* something else  */
-  })
+  m.route.mode = "hash";
+  m.route(document.getElementById('app'), "/", {
+    "/": home,
+    // "/login": login,
+    // "/dashboard": dashboard,
+});
 
 </script>
 

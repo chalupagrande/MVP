@@ -1,0 +1,15 @@
+body{
+  font-family: Verdana
+}
+
+.header{
+ background-color: #999; 
+ height:30px;
+}
+
+.header a{
+  color: white;
+  font-size: 18px;
+  margin:5px;
+  text-decoration: none;
+}
