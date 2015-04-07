@@ -44,7 +44,6 @@ app.post('/signup', function(req, res){
 
 app.get('/user/*', function(req, res){
   var un = req.url.slice(6)
-  console.log("slice", un)
   db.query("SELECT r.rating FROM ratings r JOIN users u ON u.id = r.user_id WHERE u.username = ?",[un], function(err, results){
     console.log(results)
     if(results.length === 0){
@@ -53,19 +52,24 @@ app.get('/user/*', function(req, res){
       res.send({success : true, data : results})
     }
   })
-    // console.log("the results are:", results.length)
-    // if(results.length === 0){
-    //   res.send({success: false, error:"No ratings found for "+ un,})
-    // }else{
-    //   var id = results[0]
-    //   db.query("SELECT rating FROM ratings WHERE user_id = ? order by ratings.rating desc", [id], function(err, result){
-    //     console.log(result)
-    //     res.send({success : true, data : result})
-    //   })
-
-    // }
-  
 })
+
+app.post('/user/*', function(req, res){
+  var un = req.url.slice(6);
+  console.log(req.body.rating)
+  var rating = req.body.rating
+  var id = null;
+  db.query('SELECT id FROM users WHERE username = ?', [un], function(error, result){
+    //capture error
+    console.log("THE WORDS id:", result[0].id)
+    id = result[0].id;
+    db.query("INSERT INTO ratings(user_id, rating) VALUES(? ,?)", [id, rating], function(err, data){
+      res.send({success: true})
+    })
+  });
+
+})
+
 
 
 var server = app.listen(3000, function () {
