@@ -26,14 +26,11 @@
         }
       })
     }
-
-    ctrl.render = function(){
-      var r = window.ratings
-      var list = []
-      for(var i = 0; i < r.length; i++){
-        list.push(m('li', r[i].toString()))
-      }
-
+    ctrl.send = function(a){
+      //REMEBER TO PREVENT DEFAULT
+      a.preventDefault()
+      var rating = a.target.children.rating_input.value;
+      window.ratings.push(rating);
     }
 
    ctrl.fetchRatings(ctrl.id);
@@ -43,10 +40,18 @@
 
     return m('div', {class : 'wrap'},[
         m('h1', 'Welcome ' + ctrl.id +","),
+        m('form', { class : 'rating-form', onsubmit : ctrl.send}, [
+          m('input', {
+            type : 'text', 
+            name : 'rating_input',
+            placeholder : 'rating' 
+          }, 'Rating'),
+
+          m('input', {type : 'submit'}, 'Submit'),
+
+          ]), // End Form
         m('h3', 'Here are your ratings'),
         m('ul', populate())
-
-
         //render user specific content. 
 
       ]);//END WRAP 
