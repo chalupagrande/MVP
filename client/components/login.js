@@ -5,14 +5,29 @@
 
     var ctrl = this;
 
-    ctrl.send = function(a, b){
+    ctrl.send = function(a){
+      debugger;
+      a.preventDefault()
+      var username = a.target.children.username_input.value
+      var password = a.target.children.password_input.value
+
+      var data = {username : username, password : password}
+
+
       m.request({
         method: 'POST',
-        url: '/signup'
+        url: '/login',
+        data: data
       })
-      .then(
-        console.log("Log in form sent")
-      )
+      .then( function(x){
+        console.log(x.success)
+        if(x.success){
+          m.route('/user/' + x.username);
+        }else{
+          console.log('Sorry:', x.error)
+          m.route('/signup')
+        }
+      })
     }
 
   }
@@ -23,7 +38,7 @@
     return m('.login-wrap', [
       m('h1','Login'),// header
 
-      m('form', { class : 'login-form'}, [
+      m('form', { class : 'login-form', onsubmit : ctrl.send}, [
         m('input', {
           type : 'text', 
           name : 'username_input',

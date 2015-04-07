@@ -10,22 +10,19 @@
       var password = a.target.children.password_input.value
 
       console.log(username)
-      // You might want to sanitize your inputs. 
+
+      var data = {username : username, password : password}
       m.request({
-        method: 'GET',
-        url: '/signup/'+ username
-      }).then(function(result){
-        console.log("the result" ,result.body)
-
-        var data = {username : username, password : password}
-        data = JSON.stringify(data);
-        m.request({
-          method: 'POST',
-          url: '/signup', //make sure your url is relative to your localhost. DO NOT INCLUDE LOCAL HOST
-          data : data,  //when sending json, the server is expecting json. use parser.json()
-          // background: true //prevents a request from affecting redrawing
-        }).then(m.route('/login'))
-
+        url: '/signup', //make sure your url is relative to your localhost. DO NOT INCLUDE LOCAL HOST
+        method: 'POST',
+        data : data,  //when sending json, the server is expecting json. use parser.json()
+        // background: true //prevents a request from affecting redrawing
+      }).then(function(x){
+        if(x.success){
+          m.route('/login')
+        }else{
+          m.route('/signup');
+        }
       })
     }// end send
   }
