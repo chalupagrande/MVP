@@ -15,11 +15,15 @@ app.use(express.static('client'));
 app.post('/login', function(req, res){
   var un = req.body.username;
   var pw = req.body.password
+  //SHOULD HANDLE THIS WITH CALL BACKS INSTEAD OF AN IF STATEMENT. 
   if(usernameDoesntExist(un)){
-    res.send(JSON.stringify({success: true, error: 'Invalid Username'}))
+    res.send(JSON.stringify({success: true, 
+                            error: 'Invalid Username',
+                            username: un,
+                          }))
   }else{
     debugger;
-    res.send(JSON.stringify({success: false, error: 'Signning IN'}))
+    res.send(JSON.stringify({success: false, error: 'Signning IN', username : un}))
   }
 
 })
@@ -39,17 +43,27 @@ app.post('/signup', function(req, res){
 })
 
 app.get('/user/*', function(req, res){
-  // res.param(name)
-  // var un = req.url.slice(8)
-  // db.query("SELECT * FROM users WHERE username = ?",[un], function(err, results){
-  //   console.log("the results are:", results.length)
-  //   if(results.length === 0){
-  //     res.send("bad request")
-  //   }else{
-  //     res.send('okay')
-  //   }
-  // })
-  debugger;
+  var un = req.url.slice(6)
+  console.log("slice", un)
+  db.query("SELECT r.rating FROM ratings r JOIN users u ON u.id = r.user_id WHERE u.username = ?",[un], function(err, results){
+    console.log(results)
+    if(results.length === 0){
+      res.send({success: false, error:"No ratings found for "+ un,})
+    }else{
+      res.send({success : true, data : results})
+    }
+  })
+    // console.log("the results are:", results.length)
+    // if(results.length === 0){
+    //   res.send({success: false, error:"No ratings found for "+ un,})
+    // }else{
+    //   var id = results[0]
+    //   db.query("SELECT rating FROM ratings WHERE user_id = ? order by ratings.rating desc", [id], function(err, result){
+    //     console.log(result)
+    //     res.send({success : true, data : result})
+    //   })
+
+    // }
   
 })
 

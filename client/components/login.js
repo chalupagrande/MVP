@@ -6,7 +6,6 @@
     var ctrl = this;
 
     ctrl.send = function(a){
-      debugger;
       a.preventDefault()
       var username = a.target.children.username_input.value
       var password = a.target.children.password_input.value
