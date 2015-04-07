@@ -21,6 +21,7 @@
             pureRatings.push(x.data[i].rating)
           }
           window.ratings = pureRatings;
+          console.log("Setting to:", window.ratings)
         }else{
           console.log(x.error);
         }
@@ -30,7 +31,8 @@
       //REMEBER TO PREVENT DEFAULT
       a.preventDefault()
       var rating = a.target.children.rating_input.value;
-      window.ratings.push(rating);
+      console.log("Pushing:", rating)
+      window.ratings.push(rating*1);
       //sanitize inputs!!
       var data = {rating : rating}
       m.request({
@@ -40,7 +42,7 @@
       })
       .then(function(x){
         if(x.success){
-          location.reload()
+          // location.reload()
         }else{
           console.log(x.error);
         }
@@ -70,15 +72,14 @@
         m('h3', 'Here are your ratings'),
         // m('ul', populate()),
         //render user specific content. 
-        m('.the-chart', { config: mountChart.papp(window.ratings) })
+        m('.the-chart', {config: mountChart.papp(window.ratings) })
 
       ]);//END WRAP 
   }
 
   function mountChart (data, elem, hasInitialized, context) {
     if (hasInitialized) {
-      // update data
-      // context.chart.whatever
+      context.chart.series[0].setData(data, true)
     }
     else {
       context.chart = new Highcharts.Chart({
@@ -95,6 +96,8 @@
           // data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
         }]
       });
+      // window.chart = context.chart
+      // window.data = data
     }
   }// END MOUNT CHART
 
