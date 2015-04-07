@@ -8,7 +8,7 @@ var mysql = require('mysql');
  dbConnection = mysql.createConnection({
   user: "root",
   password: "",
-  database: "chat"
+  database: "rating"
 });
 dbConnection.connect();
 

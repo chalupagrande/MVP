@@ -3,7 +3,7 @@ var db = require('../db');
 //database connection.
 
 module.exports = {
-  messages: {
+  ratings: {
     find: function () {
 
       
