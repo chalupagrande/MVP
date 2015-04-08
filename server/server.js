@@ -22,7 +22,6 @@ app.post('/login', function(req, res){
                             username: un,
                           }))
   }else{
-    debugger;
     res.send(JSON.stringify({success: false, error: 'Signning IN', username : un}))
   }
 
@@ -37,7 +36,7 @@ app.post('/signup', function(req, res){
       //You must send back a Object -otherwise the .then client side wont run
       res.send(JSON.stringify({success: true}))
     }) 
-  }else{
+  }else{ 
     res.send(JSON.stringify({success: false, error: 'Username taken.'}))
   }
 })
@@ -45,7 +44,6 @@ app.post('/signup', function(req, res){
 app.get('/user/*', function(req, res){
   var un = req.url.slice(6)
   db.query("SELECT r.rating FROM ratings r JOIN users u ON u.id = r.user_id WHERE u.username = ?",[un], function(err, results){
-    console.log(results)
     if(results.length === 0){
       res.send({success: false, error:"No ratings found for "+ un,})
     }else{
@@ -56,7 +54,6 @@ app.get('/user/*', function(req, res){
 
 app.post('/user/*', function(req, res){
   var un = req.url.slice(6);
-  console.log(req.body.rating)
   var rating = req.body.rating
   var id = null;
   db.query('SELECT id FROM users WHERE username = ?', [un], function(error, result){
@@ -69,8 +66,6 @@ app.post('/user/*', function(req, res){
   });
 
 })
-
-
 
 var server = app.listen(3000, function () {
   var host = server.address().address;

@@ -15,3 +15,10 @@ CREATE TABLE ratings (
   user_id INT NOT NULL,
   rating int(9)
 );
+
+CREATE TABLE sessions (
+  id INT NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (id),
+  user_id INT NOT NULL,
+  session_id varchar(64)
+);

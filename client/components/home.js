@@ -7,7 +7,7 @@
 
   home.view = function (ctrl) {
     return m('.home', [
-      m('h3', "Welcome To The Thing"),
+      m('h3', "Welcome To Chart Me!"),
     ])
   }
 
